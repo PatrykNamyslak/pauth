@@ -1,17 +1,17 @@
 {
-    "name": "PatrykNamyslak/php-auth",
+    "name": "patryknamyslak/php-auth",
     "description": "Simple PHP Auth",
     "type": "library",
     "require": {
-        "php": ">=8.0"
-	"ext-pdo": "*"
+        "php": ">=8.0",
+	    "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
-            "PatrykNamyslak\\php-auth\\": "src/"
+            "patryknamyslak\\php-auth\\": "src/"
         }
     },
-    "license": "Custom",
+    "license": "CC-BY-NC-4.0",
     "authors": [
         {
             "name": "Patryk Namyslak",
