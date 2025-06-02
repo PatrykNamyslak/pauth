@@ -2,6 +2,7 @@
     "name": "patryknamyslak/php-auth",
     "description": "Simple PHP Auth",
     "type": "library",
+    "version": "1.0.0",
     "require": {
         "php": ">=8.0",
         "ext-pdo": "*"
