@@ -10,15 +10,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `User ID` int NOT NULL,
-  `Email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-)
+  `Email` varchar(100) DEFAULT NULL,
+  `Username` varchar(50) NOT NULL,
+  `Password` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`User ID`),
-  ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `Username` (`Username`);
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 
 ALTER TABLE `users`
