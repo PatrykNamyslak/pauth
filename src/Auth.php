@@ -3,7 +3,7 @@
 // Make sure to have the \PDO extension enabled in your PHP configuration.
 
 
-namespace PatrykNamyslak\PhpAuth;
+namespace PatrykNamyslak;
 
 class Auth{
     private \PDO $database;
