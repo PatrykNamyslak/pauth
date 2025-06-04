@@ -3,6 +3,7 @@
 // Make sure to have the PDO extension enabled in your PHP configuration.
 class Auth{
     private PDO $database;
+    private string $table;
     /**
      * @param string $database
      * @param string $table : The table that holds the authentication credentials
@@ -17,6 +18,7 @@ class Auth{
             $this->database = new PDO($dsn, $username, $password);
             $this->database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->database->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->table = $table;
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
         }
@@ -31,7 +33,7 @@ class Auth{
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $stmt = $this->database->prepare("SELECT * FROM `users` WHERE `Username` = :username");
+            $stmt = $this->database->prepare("SELECT * FROM `{$this->table}` WHERE `Username` = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
             $user = $stmt->fetch();
@@ -53,7 +55,7 @@ class Auth{
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $stmt = $this->database->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+            $stmt = $this->database->prepare("INSERT INTO {$this->table} (username, password) VALUES (:username, :password)");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
 
@@ -95,7 +97,7 @@ class Auth{
     public function getUserData(){
         session_start();
         if (isset($_SESSION['User_ID'])) {
-            $stmt = $this->database->prepare("SELECT * FROM users WHERE id = :id");
+            $stmt = $this->database->prepare("SELECT * FROM {$this->table} WHERE id = :id");
             $stmt->bindParam(':id', $_SESSION['User_ID']);
             $stmt->execute();
             return $stmt->fetch();
@@ -110,7 +112,7 @@ class Auth{
         session_start();
         if (isset($_SESSION['User_ID'])) {
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $stmt = $this->database->prepare("UPDATE users SET password = :password WHERE id = :id");
+            $stmt = $this->database->prepare("UPDATE {$this->table} SET password = :password WHERE id = :id");
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->bindParam(':id', $_SESSION['User_ID']);
             return $stmt->execute();
@@ -124,7 +126,7 @@ class Auth{
     public function deleteUser(){
         session_start();
         if (isset($_SESSION['User_ID'])) {
-            $stmt = $this->database->prepare("DELETE FROM users WHERE id = :id");
+            $stmt = $this->database->prepare("DELETE FROM {$this->table} WHERE id = :id");
             $stmt->bindParam(':id', $_SESSION['User_ID']);
             $result = $stmt->execute();
             if ($result) {
