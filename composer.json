@@ -8,7 +8,7 @@
     "license": "CC-BY-NC-4.0",
     "autoload": {
         "psr-4": {
-            "Patryknamyslak\\PhpAuth\\": "src/"
+            "Patryknamyslak\\": "src/"
         }
     },
     "authors": [
