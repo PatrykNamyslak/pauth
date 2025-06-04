@@ -1,5 +1,5 @@
 {
-    "name": "PatrykNamyslak/php-auth",
+    "name": "patryknamyslak/php-auth",
     "description": "Simple PHP Auth",
     "type": "library",
     "require": {
