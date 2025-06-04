@@ -75,7 +75,7 @@ class Auth{
     /**
      * @return bool : Returns true if logout is successful, false otherwise.
      */
-    public function logout(){
+    public static function logout(){
         session_start();
         session_unset();
         session_destroy();
@@ -84,7 +84,7 @@ class Auth{
     /**
      * @return bool : Returns true if the user is logged in, false otherwise.
      */
-    public function isLoggedIn(){
+    public static function isLoggedIn(){
         session_start();
         return isset($_SESSION['loggedIn']);
     }
