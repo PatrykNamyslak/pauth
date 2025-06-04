@@ -1,8 +1,12 @@
 <?php
-// This Auth class uses PDO for database connections!
-// Make sure to have the PDO extension enabled in your PHP configuration.
+// This Auth class uses \PDO for database connections!
+// Make sure to have the \PDO extension enabled in your PHP configuration.
+
+
+namespace PatrykNamyslak\PhpAuth;
+
 class Auth{
-    private PDO $database;
+    private \PDO $database;
     private string $table;
     /**
      * @param string $database
@@ -15,11 +19,11 @@ class Auth{
     public function __construct(string $database, string $table, string $host, string $username, string $password){
         $dsn = "mysql:host=$host;dbname=$database;";
         try {
-            $this->database = new PDO($dsn, $username, $password);
-            $this->database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->database->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->database = new \PDO($dsn, $username, $password);
+            $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->database->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
             $this->table = $table;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
         }
     }
@@ -62,7 +66,7 @@ class Auth{
             try {
                 $stmt->execute();
                 return true;
-            } catch (PDOException $e) {
+            } catch (\PDOException $e) {
                 return false; // Registration failed
             }
         }
@@ -139,9 +143,9 @@ class Auth{
     }
 
     /**
-     * @return PDO : Returns the PDO database connection.
+     * @return \PDO : Returns the \PDO database connection.
      */
-    public function getDatabaseConnection(): PDO {
+    public function getDatabaseConnection(): \PDO {
         return $this->database;
     }
 
