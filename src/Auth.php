@@ -79,7 +79,8 @@ class Auth{
         session_start();
         session_unset();
         session_destroy();
-        return true;
+        header('location: /');
+        exit;
     }
     /**
      * @return bool : Returns true if the user is logged in, false otherwise.
