@@ -5,7 +5,7 @@ class Loader{
     public static function createInstance(){
         return new self;
     }
-    private function load(){
+    public function load(){
         self::setPredefinedDatabaseObject();
     }
     private static function setPredefinedDatabaseObject(){
