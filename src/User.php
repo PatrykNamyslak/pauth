@@ -54,6 +54,7 @@ class User extends Auth{
      * @return string
      */
     protected static function generate_UserID(): string{
+        global $Predefined_DB_Connection;
         while (true){
             $generated_UserID = generate_random_string(8);
             if (!(new User(Database: $Predefined_DB_Connection ,userID: $generated_UserID))){
