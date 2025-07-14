@@ -2,7 +2,6 @@
 // This Auth class uses \PDO for database connections!
 // Make sure to have the \PDO extension enabled in your PHP configuration.
 
-
 namespace PatrykNamyslak;
 
 class Auth{
