@@ -20,10 +20,7 @@ class User extends Auth{
         // Prepare the SQL query to fetch user details
         $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Auth->table} WHERE '{$ColumnToQueryBy}' = '{$SearchValue}';";
         // Execute the query
-        $stmt = $Database->query($query);
-        // Fetch the result
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        // If a result is found, set the user properties
+        $result = $Database->query($query);
         if ($result) {
             $this->username = $result['Username'];
             $this->userID = $result['User_ID'];
