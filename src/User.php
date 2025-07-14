@@ -47,16 +47,8 @@ class User extends Auth{
      */
     protected static function generate_UserID(): string{
         while (true){
-            // just the same line as in environment_variables.php
-            $predefined_db_connection_local = new Database(
-                host: $_ENV['PHP_AUTH_DB_HOST'],
-                database_name: $_ENV['PHP_AUTH_DB_NAME'],
-                username: $_ENV['PHP_AUTH_DB_USERNAME'],
-                password: $_ENV['PHP_AUTH_DB_PASSWORD']
-            );
-
             $generated_UserID = generate_random_string(8);
-            if (!(new User(Database: $GLOBALS['predefined_db_connection'] ??$predefined_db_connection_local ,userID: $generated_UserID))){
+            if (!(new User(Database: $GLOBALS['predefined_db_connection'] ,userID: $generated_UserID))){
                 break;
             }
         }
