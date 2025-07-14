@@ -8,7 +8,7 @@ use PDOException;
  * * Database class for managing database connections and queries
  */
 class Database {
-    protected \PDO $connection;
+    public \PDO $connection;
     public string $table;
     /**
      * @param string $host : Host for your database e.g localhost.
