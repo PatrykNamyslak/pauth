@@ -2,6 +2,15 @@
 // This model is used for controlling the logged in user or just any user that is found in the given parameter options
 namespace PatrykNamyslak;
 
+function generate_random_string(int $length): string{
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $string = '';
+    for ($i = 0; $i < $length; $i++) {
+        $string .= $characters[random_int(0, strlen($characters) - 1)];
+    }
+    return $string;
+}
+
 use Exception;
 
 /** User model for authentication and user management */
@@ -34,5 +43,8 @@ class User extends Auth{
             // If no user is found, throw an exception
             throw new Exception("User not found.");
         }
+    }
+    protected static function generate_UserID(): string{
+        return generate_random_string(8);
     }
 }

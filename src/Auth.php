@@ -59,6 +59,8 @@ class Auth{
      */
     public function register(){
         if (isset($_POST['username']) && isset($_POST['password']) and isset($_POST['email'])) {
+            $userID = User::generate_userID();
+            // Add a check if the userid doesnt exist yet
             $email = $_POST['email'];
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
