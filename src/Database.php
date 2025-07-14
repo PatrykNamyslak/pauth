@@ -1,5 +1,8 @@
 <?php
 namespace PatrykNamyslak;
+
+use Exception;
+use PDOException;
 /**
  * * Database class for managing database connections and queries
  */
@@ -19,8 +22,12 @@ class Database {
     public function __construct(string $host='localhost', string $database_name, string $username, string $password, string $table = 'users') {
         // Set table
         $this->table = $table;
-        // Create a new PDO connection
-        $this->connection = new \PDO("mysql:host={$host};dbname={$database_name}", $username, $password);
+        // Create a new PDO connection with safeguards
+        try{
+            $this->connection = new \PDO("mysql:host={$host};dbname={$database_name}", $username, $password);
+        }catch(PDOException $e){
+            throw new Exception("Database connection failed: " . $e->getMessage());
+        }
     }
     // Query the database and return results
     public function query(string $query): Query{
