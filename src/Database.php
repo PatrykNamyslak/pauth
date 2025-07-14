@@ -17,7 +17,7 @@ class Database {
     // and set the default table name
     // Default table is 'users' if not specified
     public function __construct(string $host='localhost', string $database_name, string $username, string $password, string $table = 'users') {
-        // Default table
+        // Set table
         $this->table = $table;
         // Create a new PDO connection
         $this->connection = new \PDO("mysql:host={$host};dbname={$database_name}", $username, $password);

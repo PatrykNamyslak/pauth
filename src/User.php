@@ -8,7 +8,7 @@ class User extends Auth{
     private string $userID;
     private string $email;
 
-    function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, Database $Database){
+    function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, object $Database){
         // Column to query the database by
         $ColumnToQueryBy = match (true){
             isset($username) => 'Username',
@@ -18,13 +18,13 @@ class User extends Auth{
         // Determine the search value based on the provided parameters
         $SearchValue = $username ?? $userID ?? $email;
         // Prepare the SQL query to fetch user details
-        $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Auth->table} WHERE '{$ColumnToQueryBy}' = '{$SearchValue}';";
+        $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Database->table} WHERE '{$ColumnToQueryBy}' = '{$SearchValue}';";
         // Execute the query
-        $result = $Database->query($query);
-        if ($result) {
-            $this->username = $result['Username'];
-            $this->userID = $result['User_ID'];
-            $this->email = $result['Email'];
+        $data = $Database->query($query);
+        if ($data) {
+            $this->username = $data['Username'];
+            $this->userID = $data['User_ID'];
+            $this->email = $data['Email'];
         } else {
             // If no user is found, throw an exception
             throw new \Exception("User not found.");
