@@ -15,11 +15,8 @@ class User extends Auth{
             isset($userID) => 'User_ID',
             isset($email) => 'Email',
         };
-        $SearchValue = match (true){
-            isset($username) => $username,
-            isset($userID) => $userID,
-            isset($email) => $email,
-        };
+        $SearchValue = $username ?? $userID ?? $email;
         $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Auth->table} WHERE '{$ColumnToQueryBy}' = '{$SearchValue}';";
+        $result = $Auth->query($query);
     }
 }
