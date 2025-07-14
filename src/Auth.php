@@ -64,7 +64,8 @@ class Auth{
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $stmt = $this->database->prepare("INSERT INTO {$this->table} (email, username, password) VALUES (:email, :username, :password)");
+            $stmt = $this->database->prepare("INSERT INTO {$this->table} (User_ID, Email, Username, Password) VALUES (:userID, :email, :username, :password)");
+            $stmt->bindParam(':userID', $userID);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
