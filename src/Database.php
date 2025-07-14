@@ -8,7 +8,7 @@ class Database {
     public string $table;
     /**
      * @param string $host : Host for your database e.g localhost.
-     * @param string $dbname : Name of the database.
+     * @param string $database_name : Name of the database.
      * @param string $username : Username for your database.
      * @param string $password : Password for your database.
      */
@@ -16,11 +16,11 @@ class Database {
     // Constructor to initialize the database connection
     // and set the default table name
     // Default table is 'users' if not specified
-    public function __construct(string $host='localhost', string $dbname, string $username, string $password, string $table = 'users') {
+    public function __construct(string $host='localhost', string $database_name, string $username, string $password, string $table = 'users') {
         // Default table
         $this->table = $table;
         // Create a new PDO connection
-        $this->connection = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $this->connection = new \PDO("mysql:host={$host};dbname={$database_name}", $username, $password);
     }
     // Query the database and return results
     public function query(string $sql): array {
