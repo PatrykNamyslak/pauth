@@ -32,5 +32,4 @@ if ($requirements_met){
 }else{
     throw new Exception("Looks like you have not setup your configuration! Go to " . __DIR__ . '/.env to set it up');
 }
-
 ?>
