@@ -23,9 +23,8 @@ class User extends Auth{
         // Determine the search value based on the provided parameters
         $SearchValue = $username ?? $userID ?? $email;
         // Prepare the SQL query to fetch user details
-        $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Database->table} WHERE `{$ColumnToQueryBy}` = '{$SearchValue}';";
+        $query = "SELECT `Username`,`Email`,`User_ID` FROM `{$Database->table}` WHERE `{$ColumnToQueryBy}` = '{$SearchValue}';";
         // Execute the query
-        exit($query);
         $data = $Database->query($query)->fetch();
         if ($data) {
             $this->username = $data['Username'];
