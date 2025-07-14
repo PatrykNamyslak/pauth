@@ -10,7 +10,7 @@ class User extends Auth{
     private string $userID;
     private string $email;
 
-    function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, object $Database){
+    function __construct(object $Database, ?string $username=NULL, ?string $userID=NULL, ?string $email=NULL){
         if (!($Database->connection instanceof \PDO)){
             throw new Exception('$Database->connection must be an instance of PDO. ' . var_dump($Database) . ' provided.');
         }
