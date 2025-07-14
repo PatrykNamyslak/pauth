@@ -44,7 +44,17 @@ class User extends Auth{
             throw new Exception("User not found.");
         }
     }
+    /**
+     * This function will return a unique user id by checking that it does not already exist
+     * @return string
+     */
     protected static function generate_UserID(): string{
-        return generate_random_string(8);
+        while (true){
+            $generated_UserID = generate_random_string(8);
+            if (!(new Database)->query(query: "SELECT `Username` FROM `users` WHERE `User_ID` = '{$generated_UserID}';")->fetch()){
+                break;
+            }
+        }
+        return $generated_UserID;
     }
 }
