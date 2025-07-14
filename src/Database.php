@@ -4,7 +4,7 @@ namespace PatrykNamyslak;
  * * Database class for managing database connections and queries
  */
 class Database {
-    private \PDO $connection;
+    protected \PDO $connection;
     public string $table;
     /**
      * @param string $host : Host for your database e.g localhost.
@@ -23,10 +23,8 @@ class Database {
         $this->connection = new \PDO("mysql:host={$host};dbname={$database_name}", $username, $password);
     }
     // Query the database and return results
-    public function query(string $sql): array {
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    public function query(string $query): Query{
+        return new Query($query);
     }
     // Execute a prepared statement
     public function execute(string $sql, array $params = []): bool {
@@ -38,4 +36,25 @@ class Database {
     }
 }
 
+
+class Query extends Database{
+    protected string $query;
+
+    protected function __construct(string $query){
+        $this->query = $query;
+    }
+    public function fetch(){
+        $stmt = $this->connection->query($this->query);
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $data;
+    }
+    /**
+     * A non prepared statement query [FOR INTERNAL USE ONLY]
+     */
+    public function fetchAll(){
+        $stmt = $this->connection->query($this->query);
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $data;
+    }
+}
 ?>
