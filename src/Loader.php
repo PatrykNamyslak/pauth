@@ -1,5 +1,5 @@
 <?php
-
+namespace PatrykNamyslak;
 class Loader{
     private function __construct(){}
     public static function createInstance(){
