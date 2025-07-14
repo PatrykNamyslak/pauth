@@ -2,6 +2,8 @@
 // This model is used for controlling the logged in user or just any user that is found in the given parameter options
 namespace PatrykNamyslak;
 
+use Exception;
+
 /** User model for authentication and user management */
 class User extends Auth{
     private string $username;
@@ -9,6 +11,9 @@ class User extends Auth{
     private string $email;
 
     function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, object $Database){
+        if (!($Database->connection instanceof \PDO)){
+            throw new Exception('$Database->connection must be an instance of PDO. ' . var_dump($Database) . ' provided.');
+        }
         // Column to query the database by
         $ColumnToQueryBy = match (true){
             isset($username) => 'Username',
@@ -27,7 +32,7 @@ class User extends Auth{
             $this->email = $data['Email'];
         } else {
             // If no user is found, throw an exception
-            throw new \Exception("User not found.");
+            throw new Exception("User not found.");
         }
     }
 }
