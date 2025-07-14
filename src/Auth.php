@@ -7,7 +7,7 @@ namespace PatrykNamyslak;
 
 class Auth{
     private \PDO $database;
-    private string $table;
+    protected string $table;
     /**
      * @param string $database
      * @param string $table : The table that holds the authentication credentials
