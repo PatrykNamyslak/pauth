@@ -8,7 +8,7 @@ class User extends Auth{
     private string $userID;
     private string $email;
 
-    function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, Auth $Auth){
+    function __construct(?string $username=NULL, ?string $userID=NULL, ?string $email=NULL, Database $Database){
         // Column to query the database by
         $ColumnToQueryBy = match (true){
             isset($username) => 'Username',
@@ -20,7 +20,7 @@ class User extends Auth{
         // Prepare the SQL query to fetch user details
         $query = "SELECT `Username`,`Email`,`User_ID` FROM {$Auth->table} WHERE '{$ColumnToQueryBy}' = '{$SearchValue}';";
         // Execute the query
-        $stmt = $Auth->database->query($query);
+        $stmt = $Database->query($query);
         // Fetch the result
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         // If a result is found, set the user properties
