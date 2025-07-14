@@ -44,11 +44,13 @@ class Database {
 }
 
 
+
 class Query extends Database{
     protected string $query;
-
-    protected function __construct(string $query){
+    public \PDO $connection;
+    protected function __construct(string $query, Database $database){
         $this->query = $query;
+        $this->connection = $database->connection;
     }
     public function fetch(){
         $stmt = $this->connection->query($this->query);
