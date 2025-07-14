@@ -31,7 +31,7 @@ class Database {
     }
     // Query the database and return results
     public function query(string $query): Query{
-        return new Query($query);
+        return new Query(query: $query, database: $this);
     }
     // Execute a prepared statement
     public function execute(string $sql, array $params = []): bool {
