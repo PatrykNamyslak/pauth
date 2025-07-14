@@ -5,7 +5,7 @@
 namespace PatrykNamyslak;
 
 class Auth{
-    private \PDO $database;
+    protected \PDO $database;
     protected string $table;
     /**
      * @param string $database
@@ -18,9 +18,13 @@ class Auth{
     public function __construct(string $database, string $table, string $host, string $username, string $password){
         $dsn = "mysql:host=$host;dbname=$database;";
         try {
+            // Create a new PDO instance
             $this->database = new \PDO($dsn, $username, $password);
+            // Set error mode to exception for better error handling
             $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            // Set default fetch mode to associative array
             $this->database->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            // Set the table name
             $this->table = $table;
         } catch (\PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
