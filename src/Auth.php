@@ -58,18 +58,20 @@ class Auth{
      * @return bool : Returns true if registration is successful, false otherwise.
      */
     public function register(){
-        if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (isset($_POST['username']) && isset($_POST['password']) and isset($_POST['email'])) {
+            $email = $_POST['email'];
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $stmt = $this->database->prepare("INSERT INTO {$this->table} (username, password) VALUES (:username, :password)");
+            $stmt = $this->database->prepare("INSERT INTO {$this->table} (email, username, password) VALUES (:email, :username, :password)");
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
 
             try {
                 $stmt->execute();
                 return true;
-            } catch (\PDOException $e) {
+            } catch (\PDOException $e){
                 return false; // Registration failed
             }
         }
