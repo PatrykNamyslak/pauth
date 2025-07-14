@@ -3,7 +3,8 @@
     "description": "Simple PHP Auth",
     "type": "library",
     "require": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "*"
     },
     "license": "CC-BY-NC-4.0",
     "autoload": {

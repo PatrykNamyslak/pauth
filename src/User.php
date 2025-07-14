@@ -2,6 +2,8 @@
 // This model is used for controlling the logged in user or just any user that is found in the given parameter options
 namespace PatrykNamyslak;
 
+include_once 'environment_variables.php';
+
 function generate_random_string(int $length): string{
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $string = '';
@@ -18,11 +20,13 @@ class User extends Auth{
     private string $username;
     private string $userID;
     private string $email;
-
+    protected object $connection;
     function __construct(object $Database, ?string $username=NULL, ?string $userID=NULL, ?string $email=NULL){
         if (!($Database->connection instanceof \PDO)){
             throw new Exception('$Database->connection must be an instance of PDO. ' . var_dump($Database) . ' provided.');
         }
+        // set the db connection
+        $this->connection = $Database->connection;
         // Column to query the database by
         $ColumnToQueryBy = match (true){
             isset($username) => 'Username',
@@ -34,14 +38,15 @@ class User extends Auth{
         // Prepare the SQL query to fetch user details
         $query = "SELECT `Username`,`Email`,`User_ID` FROM `{$Database->table}` WHERE `{$ColumnToQueryBy}` = '{$SearchValue}';";
         // Execute the query
-        $data = $Database->query($query)->fetch();
+        $data = $this->connection->query($query)->fetch();
         if ($data) {
             $this->username = $data['Username'];
             $this->userID = $data['User_ID'];
             $this->email = $data['Email'];
         } else {
             // If no user is found, throw an exception
-            throw new Exception("User not found.");
+            return FALSE;
+            // throw new Exception("User not found.");
         }
     }
     /**
@@ -51,7 +56,7 @@ class User extends Auth{
     protected static function generate_UserID(): string{
         while (true){
             $generated_UserID = generate_random_string(8);
-            if (!(new Database)->query(query: "SELECT `Username` FROM `users` WHERE `User_ID` = '{$generated_UserID}';")->fetch()){
+            if (!(new User(Database: $Predefined_DB_Connection ,userID: $generated_UserID))){
                 break;
             }
         }

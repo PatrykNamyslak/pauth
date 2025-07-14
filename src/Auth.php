@@ -3,6 +3,7 @@
 // Make sure to have the \PDO extension enabled in your PHP configuration.
 
 namespace PatrykNamyslak;
+include_once 'environment_variables.php';
 
 class Auth{
     protected \PDO $database;

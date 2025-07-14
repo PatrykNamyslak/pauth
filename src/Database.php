@@ -1,5 +1,6 @@
 <?php
 namespace PatrykNamyslak;
+include_once 'environment_variables.php';
 
 use Exception;
 use PDOException;
@@ -66,4 +67,5 @@ class Query extends Database{
         return $data;
     }
 }
+
 ?>
