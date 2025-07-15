@@ -16,10 +16,10 @@ class Loader{
          * Set a default database connection connection if the configuration is setup properly
         */
         $required_db_variables = [
-            'PHP_AUTH_DB_HOST',
-            'PHP_AUTH_DB_NAME',
-            'PHP_AUTH_DB_USERNAME',
-            'PHP_AUTH_DB_PASSWORD'
+            'PAUTH_DB_HOST',
+            'PAUTH_DB_NAME',
+            'PAUTH_DB_USERNAME',
+            'PAUTH_DB_PASSWORD'
         ];
 
         $requirements_met = TRUE;
@@ -30,10 +30,10 @@ class Loader{
         }
         if ($requirements_met){
             $predefined_db_connection = new Patbase(
-                host: $_ENV['PHP_AUTH_DB_HOST'],
-                database_name: $_ENV['PHP_AUTH_DB_NAME'],
-                username: $_ENV['PHP_AUTH_DB_USERNAME'],
-                password: $_ENV['PHP_AUTH_DB_PASSWORD']
+                host: $_ENV['PAUTH_DB_HOST'],
+                database_name: $_ENV['PAUTH_DB_NAME'],
+                username: $_ENV['PAUTH_DB_USERNAME'],
+                password: $_ENV['PAUTH_DB_PASSWORD']
             );
         }else{
             throw new \Exception("Looks like you have not setup your configuration! Go to " . __DIR__ . '/.env to set it up');
