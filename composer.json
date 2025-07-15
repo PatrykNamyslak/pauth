@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "ext-pdo": "*",
-        "vlucas/phpdotenv": "*"
+        "vlucas/phpdotenv": "*",
+        "patryknamyslak/patbase": "*"
     },
     "license": "CC-BY-NC-4.0",
     "autoload": {
