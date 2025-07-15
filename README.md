@@ -11,7 +11,7 @@ Are you tired of having to make an auth for a small simple project? Me too! So I
 Install php-auth with composer
 
 ```bash
-  composer require patryknamyslak/php-auth
+  composer require patryknamyslak/pauth
 ```
     
 ## Authors
