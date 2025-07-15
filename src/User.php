@@ -42,6 +42,15 @@ class User extends Auth{
         $this->userID = $userData['User_ID'];
         $this->email = $userData['Email'];
     }
+    public function username(): string{
+        return $this->username;
+    }
+    public function email(): string{
+        return $this->email;
+    }
+    public function userID(): string{
+        return $this->userID;
+    }
     /**
      * This function will return a unique user id by checking that it does not already exist
      * @return string
