@@ -1,5 +1,7 @@
 <?php
 namespace PatrykNamyslak;
+require_once 'environment_variables.php';
+
 class Loader{
     private function __construct(){}
     public static function createInstance(){
