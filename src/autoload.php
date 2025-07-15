@@ -1,1 +1,1 @@
-../../../vendor/autoload.php
+../../../autoload.php
