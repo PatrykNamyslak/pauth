@@ -172,6 +172,16 @@ class Auth{
         // Add any other user data you want to store in the session
         // For example, you can store roles or permissions if needed
     }
+    /**
+     * Use this to require login on a page
+     * @return void
+     */
+    public function required(){
+        if (!self::isLoggedIn()){
+            header('location: /login');
+            exit;
+        }
+    }
 }
 
 
