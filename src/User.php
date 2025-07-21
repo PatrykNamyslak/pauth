@@ -39,7 +39,7 @@ class User extends Auth{
     }
     protected function __construct($userData){
         $this->username = $userData['Username'];
-        $this->userID = $userData['User_ID'];
+        $this->userID = $userData['User ID'];
         $this->email = $userData['Email'];
     }
     public function username(): string{

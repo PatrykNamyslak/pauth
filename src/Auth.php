@@ -165,10 +165,13 @@ class Auth{
      */
     private function setUserData(array $userData) {
         session_start();
+        // remove the password
+        unset($userData['Password']);
+        // merge the userData into the session variables super global array
         $_SESSION = array_merge($_SESSION, $userData);
+        // Set a user object
+        $_SESSION['User'] = serialize(new User($userData));
         $_SESSION['loggedIn'] = true;
-        // Add any other user data you want to store in the session
-        // For example, you can store roles or permissions if needed
     }
     /**
      * Use this to require login on a page
