@@ -9,9 +9,9 @@ use Exception;
 
 /** User model for authentication and user management */
 class User extends Auth{
-    private string $username;
-    private string $userID;
-    private string $email;
+    public readonly string $username;
+    public readonly int|string $userID;
+    public readonly ?string $email;
 
     public static function instantiate(object $Database, ?string $username=NULL, ?string $userID=NULL, ?string $email=NULL): User|NULL{
         if (!($Database->connection instanceof \PDO)){
