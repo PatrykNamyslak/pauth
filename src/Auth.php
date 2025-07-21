@@ -165,9 +165,7 @@ class Auth{
      */
     private function setUserData(array $userData) {
         session_start();
-        $_SESSION['User_ID'] = $userData['User_ID'];
-        $_SESSION['Username'] = $userData['Username'];
-        $_SESSION['Email'] = $userData['Email'];
+        $_SESSION = array_merge($_SESSION, $userData);
         $_SESSION['loggedIn'] = true;
         // Add any other user data you want to store in the session
         // For example, you can store roles or permissions if needed
