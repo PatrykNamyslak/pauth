@@ -169,8 +169,14 @@ class Auth{
         unset($userData['Password']);
         // merge the userData into the session variables super global array
         $_SESSION = array_merge($_SESSION, $userData);
+        // Iterate through each piece of data and extract any sort of ID it can be User ID, Administrator ID anything that contains ID and set User ID to that.
+        foreach ($userData as $key => $data){
+            if (str_contains($key, 'ID')){
+                $_SESSION['User ID'] = $data;
+            }
+        }
         // Set a user object
-        $_SESSION['User'] = serialize(new User($userData));
+        $_SESSION['User'] = serialize(new User($_SESSION));
         $_SESSION['loggedIn'] = true;
     }
     /**
