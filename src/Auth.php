@@ -183,9 +183,9 @@ class Auth{
      * Use this to require login on a page
      * @return void
      */
-    public static function required(){
+    public static function required(string $loginPagePath = '/login'){
         if (!self::isLoggedIn()){
-            header('location: /login');
+            header("location: {$loginPagePath}");
             exit;
         }
     }
